@@ -24,20 +24,31 @@
                 players[currentRoller].score += 1;
                 currentRoller = 0;
                 console.log(`${players[currentRoller].name} won this round they rolled a ${rollResult}`);
-                return `${players[currentRoller].name} won this round they rolled a ${rollResult}`
+                return `${players[currentRoller].name} won this round they rolled a ${rollResult} ${players[currentRoller].name} rolls again`
             } else if (rollResult === 2 || rollResult === 3 || rollResult === 12) {
                 players[currentRoller].score -= 1;
                 currentRoller = 1;
                 console.log(`${players[currentRoller].name} loss this round they rolled a ${rollResult}`);
-                return `${players[currentRoller].name} loss this round they rolled a ${rollResult}`
+                return `${players[currentRoller].name} loss this round they rolled a ${rollResult} ${players[currentRoller].name}'s turn is over`
                 changeTurns();
-            } else {
+            } 
+
+            // check this line of code i want the to keep track of which player is which and when they loss it can switch back and forth between players
+            // else if (rollResult === 2 || rollResult === 3 || rollResult === 12) {
+            //     players[currentRoller].score -= 1;
+            //     currentRoller = 0;
+            //     console.log(`${players[currentRoller].name} loss this round they rolled a ${rollResult}`);
+            //     return `${players[currentRoller].name} loss this round they rolled a ${rollResult} ${players[currentRoller].name}'s turn is over`
+            //     changeTurns();
+            // }
+             else {
                 currentRollResults.push(rollResult);
                 currentRoller = (currentRoller + 1) % players.length;
             }
         } else {
             if (rollResult === currentRollResults[0]) {
                 players[currentRoller].score += 1;
+                return `${players[currentRoller].name} won this round they rolled a ${rollResult} ${players[currentRoller].name} rolls again`
                 changeTurns();
             } else {
                 currentRollResults.push(rollResult);
