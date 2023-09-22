@@ -1,5 +1,6 @@
 
     let players = [{name: "austin", score:2, id:1}, {name: "kam", score:0, id:2}];
+    let player = 'p1';
     let currentRoller = 0;
     let currentRollResults = [];
     let rollResult = 0;
@@ -17,6 +18,17 @@
       return sum;
     }
 
+    function switchPlayer(currentPlayerName) {
+        if (currentPlayerName === players[0].name) {
+          return players[1].name;
+        } else if (currentPlayerName === players[1].name) {
+          return players[0].name;
+        } else {
+          // Handle the case where the provided name is not one of the player names.
+          return currentPlayerName;
+        }
+    }
+
    
     function checkDice() {
         if (currentRollResults[0]) {
@@ -30,7 +42,8 @@
                 currentRoller = 1;
                 console.log(`${players[currentRoller].name} loss this round they rolled a ${rollResult}`);
                 return `${players[currentRoller].name} loss this round they rolled a ${rollResult} ${players[currentRoller].name}'s turn is over`
-                changeTurns();
+                // changeTurns();
+                switchPlayer();
             } 
 
             // check this line of code i want the to keep track of which player is which and when they loss it can switch back and forth between players
@@ -49,23 +62,45 @@
             if (rollResult === currentRollResults[0]) {
                 players[currentRoller].score += 1;
                 return `${players[currentRoller].name} won this round they rolled a ${rollResult} ${players[currentRoller].name} rolls again`
-                changeTurns();
+                // changeTurns();
+                switchPlayer();
             } else {
                 currentRollResults.push(rollResult);
                 currentRoller = (currentRoller + 1) % players.length;
             }
         }
         // The closing curly brace for the checkDice function should not be commented out.
+    
     }
     
-    function changeTurns() {
-        if (players.length < currentRoller - 1) {
-            currentRoller += 1;
-        } else {
-            currentRoller = 0;
-        }
-    }
+
+    // fall back on this function if needed
+    // function changeTurns() {
+    //     if (players.length < currentRoller - 1) {
+    //         currentRoller += 1;
+    //     } else {
+    //         currentRoller = 0;
+    //     }
+    // }
+
+  
+    console.log("Next player: " + switchPlayer('austin')); // This will return 'kam'
+console.log("Next player: " + switchPlayer('kam')); // This will return 'austin'
+// console.log("Next player: " + switchPlayer('unknown')); // This will return 'unknown'
+
+
+    // This function worked but im going to update it but will fallback on this if need be
+    // function switchPlayer(currentPlayer) {
+    //     if (currentPlayer === 'p1') {
+    //       player = 'p2';
+    //     } else {
+    //       player = 'p1';
+    //     }
+    //     return player;
+    //   }
     
+
+    //   console.log("This is the switchPlayer function test:", switchPlayer('p1'));
    
 //  We can just use regualr funcitons and we dont need to use a main app component
 
