@@ -24,7 +24,14 @@
         document.querySelector(".dice").style.display = "none";
     }
     // end of test from codepen
-   
+
+    // star of test code
+    $('.button').click(function() {
+        $('.dice-container').toggleClass('add-keyframe');
+      });
+//    end of test code
+
+
     function diceRoll() {
         let name1 = document.querySelector(".body .row-2 .player-1 > input").value;
         let name2 = document.querySelector(".body .row-2 .player-2 > input").value;
