@@ -104,15 +104,20 @@
     }
   */
 
-  .dice .dot {
+  /* to out the .dice from the .dot and now i can see some dots but not all */
+   .dot {
     width: 8px;
     height: 8px;
     background: #fff;
     border-radius: 50%;
     display: block;
     position: absolute;
+
+    top: 50%; /* Center vertically */
+    left: 50%; /* Center horizontally */
+    transform: translate(-50%, -50%); 
 }
-    .front { 
+    /* .front { 
        transform: rotateY(0deg) translateZ(30px);
  
        span {
@@ -141,19 +146,29 @@
              right: 12px;
           }
        }
-    }
-    .back { 
+    } */
+/* the sides go here bout to test */
+    #front { 
+        /* Position dots within the front face */
+        span:nth-child(1) { top: 12px; left: 12px; }
+        span:nth-child(2) { top: 12px; right: 12px; }
+        span:nth-child(3) { top: 26px; left: 12px; }
+        span:nth-child(4) { top: 26px; right: 12px; }
+        span:nth-child(5) { bottom: 12px; left: 12px; }
+        span:nth-child(6) { bottom: 12px; right: 12px; }
+     }
+    #back { 
        transform: rotateX(180deg) translateZ(30px);
  
-       span {
+       .dot {
           top: 26px;
           left: 26px;
        }
     }
-    .right { 
+    #right { 
        transform: rotateY(90deg) translateZ(30px); 
  
-       span {
+       .dot {
           &:nth-child(1) {
              top: 12px;
              left: 12px;
@@ -176,10 +191,10 @@
           }
        }
     }
-    .left { 
+    #left { 
        transform: rotateY(-90deg) translateZ(30px);
  
-       span {
+       .dot {
           &:nth-child(1) {
              top: 12px;
              right: 12px;
@@ -190,10 +205,10 @@
           }
        }
     }
-    .top { 
+    #top { 
        transform: rotateX(90deg) translateZ(30px);
  
-       span {
+       .dot {
           &:nth-child(1) {
              top: 12px;
              right: 12px;
@@ -208,10 +223,10 @@
           }
        }
     }
-    .bottom { 
+    #bottom { 
        transform: rotateX(-90deg) translateZ(30px);
  
-       span {
+       .dot {
           &:nth-child(1) {
              top: 12px;
              right: 12px;
