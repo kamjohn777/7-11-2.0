@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./styles.css">
+    <title>7-11/Craps</title>
+</head>
+<body>
+    <div class="body">
+        <div class="row-1">7-11/Craps</div>
+        <div class="row-2">
+          <div class="row-2-col player-1">
+            <h2>Player 1</h2>
+            <input class="player-name-inpt" placeholder="Enter Player 1 Name">
+            <div class="score-div" id="score-p1"><h2>0</h2></div>
+            <!-- <input placeholder="Enter Player 1 Name"> -->
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/0c/Terning6.svg/180px-Terning6.svg.png" alt="dice image">
+          </div>
+            <div class="row-2-col player-2">
+                <h2>Player 2</h2>
+                <input class="player-name-inpt" placeholder="Enter Player 2 Name">
+                <div class="score-div" id="score-p2"><h2>0</h2></div>
+                <!-- <input placeholder="Enter Player 2 Name"> -->
+              <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/0c/Terning6.svg/180px-Terning6.svg.png" alt="dice image">
+            </div>
+        </div>
+        <div class="row-3">
+          <div class="btn" onclick = "diceRoll()">Roll 'em !</div>
+        </div>
+        <div class="result"><br></div>
+      </div>
+
+    <script src="./app.js"></script>
+</body>
+</html>
