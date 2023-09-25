@@ -7,7 +7,7 @@
     /* width: 850px; */
     width: 900px;
     /* margin: auto; */
-
+    height: 450px;
     position: absolute;
     top: 50%;
     left: 50%;
@@ -91,7 +91,8 @@
        height: 60px;
        width: 60px;
        position: absolute;
-       background: #F76331;
+       /* background: #F76331; */
+       background: #7322ccd1;
     }
 /*  
     span {
@@ -246,6 +247,105 @@
        }
     }
  }
+
+ #front2 { 
+    /* Position dots within the front face */
+    span:nth-child(1) { top: 12px; left: 12px; }
+    span:nth-child(2) { top: 12px; right: 12px; }
+    span:nth-child(3) { top: 26px; left: 12px; }
+    span:nth-child(4) { top: 26px; right: 12px; }
+    span:nth-child(5) { bottom: 12px; left: 12px; }
+    span:nth-child(6) { bottom: 12px; right: 12px; }
+ }
+#back2 { 
+   transform: rotateX(180deg) translateZ(30px);
+
+   .dot {
+      top: 26px;
+      left: 26px;
+   }
+}
+#right2 { 
+   transform: rotateY(90deg) translateZ(30px); 
+
+   .dot {
+      &:nth-child(1) {
+         top: 12px;
+         left: 12px;
+      }
+      &:nth-child(2) {
+         top: 12px;
+         right: 12px;
+      }
+      &:nth-child(3) {
+         top: 26px;
+         left: 26px;
+      }
+      &:nth-child(4) {
+         bottom: 12px;
+         left: 12px;
+      }
+      &:nth-child(5) {
+         bottom: 12px;
+         right: 12px;
+      }
+   }
+}
+#left2 { 
+   transform: rotateY(-90deg) translateZ(30px);
+
+   .dot {
+      &:nth-child(1) {
+         top: 12px;
+         right: 12px;
+      }
+      &:nth-child(2) {
+         bottom: 12px;
+         left: 12px;
+      }
+   }
+}
+#top2 { 
+   transform: rotateX(90deg) translateZ(30px);
+
+   .dot {
+      &:nth-child(1) {
+         top: 12px;
+         right: 12px;
+      }
+      &:nth-child(2) {
+         bottom: 12px;
+         left: 12px;
+      }
+      &:nth-child(3) {
+         bottom: 26px;
+         left: 26px;
+      }
+   }
+}
+#bottom2 { 
+   transform: rotateX(-90deg) translateZ(30px);
+
+   .dot {
+      &:nth-child(1) {
+         top: 12px;
+         right: 12px;
+      }
+      &:nth-child(2) {
+         top: 12px;
+         left: 12px;
+      }
+      &:nth-child(3) {
+         bottom: 12px;
+         left: 12px;
+      }
+      &:nth-child(4) {
+         bottom: 12px;
+         right: 12px;
+      }
+   }
+}
+
  
  /* .button {
     position: fixed;

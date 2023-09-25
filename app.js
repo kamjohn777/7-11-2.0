@@ -6,38 +6,38 @@
     let rollResult = 0;
     let establishedPoint = null;
 
-    // test from codepen
-    var mainScores, currentScore, activePlayer, gamePlaying;
+    // // test from codepen
+    // var mainScores, currentScore, activePlayer, gamePlaying;
 
-    function nextPlayer() {
-        // below will execute next player turn if player rolls dice equal to 1
-        activePlayer === 0 ? activePlayer = 1 : activePlayer = 0; // same as saying if activePlayer === 0 then activePlayer === 1 else activePlayer = 0
-        currentScore = 0; //resets players current score box to 0
-    ​
-        document.getElementById("current-0").textContent = 0; //if player 1 rolls a one then score = 0
-        document.getElementById("current-1").textContent = 0; //if player 2 rolls a one then score = 0
+    // function nextPlayer() {
+    //     // below will execute next player turn if player rolls dice equal to 1
+    //     activePlayer === 0 ? activePlayer = 1 : activePlayer = 0; // same as saying if activePlayer === 0 then activePlayer === 1 else activePlayer = 0
+    //     currentScore = 0; //resets players current score box to 0
+    // ​
+    //     document.getElementById("current-0").textContent = 0; //if player 1 rolls a one then score = 0
+    //     document.getElementById("current-1").textContent = 0; //if player 2 rolls a one then score = 0
       
-        document.querySelector(".player-0-panel").classList.toggle("active"); //toggles to player 2
-        document.querySelector(".player-1-panel").classList.toggle("active"); //toggles back to player 1
-    ​
-        //once player rolls a 1 the dice will disappear and it will be next player turn
-        document.querySelector(".dice").style.display = "none";
-    }
-    // end of test from codepen
+    //     document.querySelector(".player-0-panel").classList.toggle("active"); //toggles to player 2
+    //     document.querySelector(".player-1-panel").classList.toggle("active"); //toggles back to player 1
+    // ​
+    //     //once player rolls a 1 the dice will disappear and it will be next player turn
+    //     document.querySelector(".dice").style.display = "none";
+    // }
+    // // end of test from codepen
 
-    // star of test code
-    $('.button').click(function() {
-        $('.dice-container').toggleClass('add-keyframe');
-      });
-//    end of test code
+//     // star of test code
+//     $('.button').click(function() {
+//         $('.dice-container').toggleClass('add-keyframe');
+//       });
+// //    end of test code
 
 
     function diceRoll() {
-        let name1 = document.querySelector(".body .row-2 .player-1 > input").value;
-        let name2 = document.querySelector(".body .row-2 .player-2 > input").value;
-        if(name1==""||name2=="") {
-          document.querySelector(".result").innerHTML = "Fill in names of players";
-        } else {
+        // let name1 = document.querySelector(".body .row-2 .player-1 > input").value;
+        // let name2 = document.querySelector(".body .row-2 .player-2 > input").value;
+        // if(name1==""||name2=="") {
+        //   document.querySelector(".result").innerHTML = "Fill in names of players";
+        // } else {
     
       const dice1 = Math.floor(Math.random() * 6) + 1;
       const dice2 = Math.floor(Math.random() * 6) + 1;
@@ -48,7 +48,7 @@
       checkDice();
       return sum;
         }
-    }
+    
 
     function switchPlayer(currentPlayerName) {
         if (currentPlayerName === players[0].name) {
@@ -107,12 +107,15 @@
             } else {
                 currentRollResults.push(rollResult);
                 currentRoller = (currentRoller + 1) % players.length;
+                console.log(currentRollResults);
+                console.log(currentRoller);
             }
         } else {
             if (rollResult === currentRollResults[0]) {
                 players[currentRoller].score += 1;
                 // return `${players[currentRoller].name} won this round they rolled a ${rollResult} ${players[currentRoller].name} rolls again`
                 // changeTurns();
+                console.log`${players[currentRoller].name} won this round they rolled a ${rollResult} ${players[currentRoller].name} rolls`
                 return result = `${players[currentRoller].name} won this round they rolled a ${rollResult} ${players[currentRoller].name} rolls again`;
                 switchPlayer();
                 // return;
@@ -125,12 +128,19 @@
         return result;
     }
 
+    const loopOfGame = () => {
+        // while()
+        if(players[currentRollResults].score === 25) {
+         return players[currentRoller].name;
+        }
+    }
+
   
     console.log("Next player: " + switchPlayer('austin')); // This will return 'kam'
-// console.log("Next player: " + switchPlayer('kam')); // This will return 'austin'
-// console.log("Next player: " + switchPlayer('unknown')); // This will return 'unknown'
-// console.log("this is the diceroll function:" ,diceRoll())
-// console.log("This is the currentRollResulet", currentRollResults);
+console.log("Next player: " + switchPlayer('kam')); // This will return 'austin'
+console.log("Next player: " + switchPlayer('unknown')); // This will return 'unknown'
+console.log("this is the diceroll function:" ,diceRoll())
+console.log("This is the currentRollResulet", currentRollResults);
 // diceRoll();
 // console.log("this is the checkDice function:", checkDice());
 // diceRoll();
@@ -139,8 +149,10 @@
 
 
 // Simulate the game by calling diceRoll and checkDice
-diceRoll();
-
+console.log("first call", diceRoll());
+console.log("second call", diceRoll());
+console.log("3rd call", diceRoll());
+console.log("4th", diceRoll());
 // Call checkDice and store its result in a variable
 const resultMessage = checkDice();
 
