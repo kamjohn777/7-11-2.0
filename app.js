@@ -6,7 +6,10 @@
     let rollResult = 0;
 
     // create an establishePoinnt and maybe set it to an empty array and the create a point variable that is set to represent the actual points a player can possibly have
-    let establishedPoint = null;
+    // maybe set stablisehd point to an empty array and push the results inside the array and that will be the point next create a for loop to loop through the point array and set conditions
+
+    // let establishedPoint = null;
+    let establishedPoint = [];
     let point = [4,5,6,8,9,10];
 
 
@@ -43,11 +46,13 @@
             console.log("test1:")
             if (establishedPoint === null) {
                 console.log("test2:")
-                if (rollResult === establishedPoint) {
+                // if (rollResult === establishedPoint) {
+                    if (point.includes(rollResult)) {
                     console.log("test3:")
                       // Player rolled the established point and wins
+                      establishedPoint = rollResult;
         players[currentRoller].score += 1;
-        establishedPoint = rollResult;
+        // establishedPoint = rollResult;
         console.log(`${players[currentRoller].name} won this round by rolling the point ${rollResult}`);
         console.log(`${players[currentRoller].name} rolls again`);
         // establishedPoint = rollResult;
@@ -58,7 +63,7 @@
                     // Player rolled a 7 before rolling the point and loses
                     // establishedPoint = rollResult;
                     players[currentRoller].score -= 1;
-                    console.log(`${players[currentRoller].name} rolled a 7 before rolling the point ${establishedPoint}`);
+                    console.log(`${players[currentRoller].name} rolled a 7 before rolling the point ${establishedPoint} They lose play`);
                     console.log(`${players[currentRoller].name}'s turn is over`);
                     switchPlayer();
                     // return;
@@ -86,7 +91,7 @@
                 // return `${players[currentRoller].name} loss this round they rolled a ${rollResult} ${players[currentRoller].name}'s turn is over`
                 return result = `${players[currentRoller].name} loss this round they rolled a ${rollResult} ${players[currentRoller].name}'s turn is over`;
                 // changeTurns();
-                switchPlayer();
+                // switchPlayer();
                 return;
             } else {
                 console.log("test8:")
@@ -97,14 +102,15 @@
             }
         } else {
             console.log("test9:")
-            if (rollResult === currentRollResults[0]) {
+            // if (rollResult === currentRollResults[0]) {
+                if (currentRollResults[0] === 7 || currentRollResults[0] === 11) {
                 console.log("test10:")
                 players[currentRoller].score += 1;
                 // return `${players[currentRoller].name} won this round they rolled a ${rollResult} ${players[currentRoller].name} rolls again`
                 // changeTurns();
                 console.log`${players[currentRoller].name} won this round they rolled a ${rollResult} ${players[currentRoller].name} rolls`
                 return result = `${players[currentRoller].name} won this round they rolled a ${rollResult} ${players[currentRoller].name} rolls again`;
-                switchPlayer();
+                // switchPlayer();
                 // return;
             } else {
                 console.log("test11:")
@@ -140,3 +146,27 @@ const resultMessage = checkDice();
 console.log("regular call of checkDice", checkDice());
 // Log the result message
 console.log("This is the checkDice function:", resultMessage);
+
+
+
+function simulateGame() {
+    // Initialize game state if needed
+    currentRoller = 0;
+    currentRollResults = [];
+    rollResult = 0;
+    establishedPoint = null;
+    players = [{ name: "austin", score: 2, id: 1 }, { name: "kam", score: 0, id: 2 }];
+    let rounds = 10;
+  
+    // Simulate the game by making a series of dice rolls and checking the results
+    for (let i = 0; i < 10; i++) {
+      console.log(`Round ${i + 1}`);
+      console.log("Next player: " + switchPlayer(players[currentRoller].name));
+      const result = diceRoll();
+      console.log("Result:", result);
+    }
+  }
+  
+  // Call the function to simulate the game
+//   console.log("This is the simulateGame full function", simulateGame())
+  simulateGame();
