@@ -24,7 +24,7 @@
     //   console.log(`(inside log for diceRoll function:You rolled a ${sum}`);
       rollResult = sum;
       console.log(rollResult);
-      checkDice();
+    //   checkDice();
       return rollResult;
         }
     console.log(rollResult);
@@ -32,9 +32,11 @@
     function switchPlayer(currentPlayerName) {
         if (currentPlayerName === players[0].name) {
             currentRoller = 1;
+            currentRollResults = [];
           return players[1].name;
         } else if (currentPlayerName === players[1].name) {
             currentRoller = 0;
+            currentRollResults = [];
           return players[0].name;
         } else {
           // Handle the case where the provided name is not one of the player names.
@@ -157,24 +159,30 @@ console.log("This is the checkDice function:", resultMessage);
 
 
 
-function simulateGame() {
+function simulateGame(game) {
     // Initialize game state if needed
     currentRoller = 0;
     currentRollResults = [];
     rollResult = 0;
-    establishedPoint = null;
+    establishedPoint = 0;
     players = [{ name: "austin", score: 2, id: 1 }, { name: "kam", score: 0, id: 2 }];
     let rounds = 10;
+    const result = checkDice();
   
     // Simulate the game by making a series of dice rolls and checking the results
     for (let i = 0; i < 10; i++) {
       console.log(`Round ${i + 1}`);
-      console.log("Next player: " + switchPlayer(players[currentRoller].name));
-      const result = diceRoll();
+    //   console.log("Next player: " + switchPlayer(players[currentRoller].name));
+    console.log("Next player: " + players[currentRoller].name);
+    //   const result = checkDice();
+        // result
       console.log("Result:", result);
     }
+    return result;
   }
   
   // Call the function to simulate the game
 //   console.log("This is the simulateGame full function", simulateGame())
   simulateGame();
+
+  console.log("This is the simulateGame:", simulateGame());
