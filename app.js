@@ -1,6 +1,6 @@
 
     let players = [{name: "austin", score:2, id:1}, {name: "kam", score:0, id:2}];
-    let player = 'p1';
+    // let player = 'p1';
     let currentRoller = 0;
     let currentRollResults = [];
     let rollResult = 0;
@@ -9,7 +9,8 @@
     // maybe set stablisehd point to an empty array and push the results inside the array and that will be the point next create a for loop to loop through the point array and set conditions
 
     // let establishedPoint = null;
-    let establishedPoint = [];
+    // let establishedPoint = [];
+    let establishedPoint = 0;
     let point = [4,5,6,8,9,10];
 
 
@@ -38,6 +39,9 @@
         }
     }
 
+    switchPlayer(currentRoller);
+
+    console.log("This is the switch player function:", switchPlayer(players[currentRoller].name));
    
     function checkDice() {
         let result = ''; 
