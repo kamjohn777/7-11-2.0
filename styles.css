@@ -3,11 +3,14 @@
 }
 
 .alt-theme-container {
+    display: flex;
     max-width: 115px;
     background: red;
     padding: 5px;
     border-radius: 20px;
     margin: 0;
+    align-items: center;
+    justify-content: center;
 }
 
 .circle-toggle {
@@ -35,6 +38,42 @@
 
 .circle-toggle .dark {
     transform: translateX(1);
+}
+
+.btn-toggle-container {
+    display: flex;
+    border: 1px solid black;
+    border-radius: 20px;
+    width: 100px;
+    height: 30px;
+}
+
+.fa-moon {
+    color: #7e1dcd
+}
+
+.fa-sun {
+    color: #c07ff6
+}
+
+.btn-toggle-container .dark-btn {
+    border-top-left-radius: 20px;
+    border-bottom-left-radius: 20px;
+    border: none;
+    height: 30px;
+    width: 50%;
+}
+
+.btn-toggle-container .light-btn {
+    border-top-right-radius: 20px;
+    border-bottom-right-radius: 20px;
+    border: none;
+    height: 30px;
+    width: 50%;
+}
+
+#moon-icon, #sun-icon {
+    font-size: 25px;
 }
 
 .theme-container {
@@ -198,14 +237,43 @@
        }
     } */
 /* the sides go here bout to test */
-    #front { 
-        /* Position dots within the front face */
+    /* #front { 
         span:nth-child(1) { top: 12px; left: 12px; }
         span:nth-child(2) { top: 12px; right: 12px; }
         span:nth-child(3) { top: 26px; left: 12px; }
         span:nth-child(4) { top: 26px; right: 12px; }
         span:nth-child(5) { bottom: 12px; left: 12px; }
         span:nth-child(6) { bottom: 12px; right: 12px; }
+     } */
+     #front { 
+        transform: rotateY(90deg) translateZ(30px); 
+  
+        .dot {
+           &:nth-child(1) {
+              top: 12px;
+              left: 12px;
+           }
+           &:nth-child(2) {
+              top: 12px;
+              right: 12px;
+           }
+           &:nth-child(3) {
+              top: 26px;
+              left: 26px;
+           }
+           &:nth-child(4) {
+              bottom: 12px;
+              left: 12px;
+           }
+           &:nth-child(5) {
+              bottom: 12px;
+              right: 12px;
+           }
+           &:nth-child(6) {
+            bottom: 14px;
+            right: 14px;
+           }
+        }
      }
     #back { 
        transform: rotateX(180deg) translateZ(30px);
