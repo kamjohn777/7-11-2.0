@@ -1,7 +1,8 @@
 
     let players = [{name: "austin", score:2, id:1}, {name: "kam", score:0, id:2}];
     // let player = 'p1';
-    let currentRoller = 0;
+    // let currentRoller = 0;
+    let currentRoller= 0;
     let currentRollResults = [];
     let rollResult = 0;
 
@@ -30,8 +31,10 @@
 
     function switchPlayer(currentPlayerName) {
         if (currentPlayerName === players[0].name) {
+            currentRoller = 1;
           return players[1].name;
         } else if (currentPlayerName === players[1].name) {
+            currentRoller = 0;
           return players[0].name;
         } else {
           // Handle the case where the provided name is not one of the player names.
@@ -39,9 +42,9 @@
         }
     }
 
-    switchPlayer(currentRoller);
+    // switchPlayer(currentRoller);
 
-    console.log("This is the switch player function:", switchPlayer(players[currentRoller].name));
+    console.log("This is the switch player function:", switchPlayer(players[currentRoller].name), 'This is the current roller: ', currentRoller);
    
     function checkDice() {
         let result = ''; 
@@ -83,20 +86,21 @@
             if (rollResult === 7 || rollResult === 11) {
                 console.log("test6:")
                 players[currentRoller].score += 1;
-                currentRoller = 0;
+                // this is why I was getting the austin always getting 7 and 11 because i set currentRoller to 0 which is austins index
+                // currentRoller = 0;
                 console.log(`${players[currentRoller].name} won this round they rolled a ${rollResult}`);
                 // return `${players[currentRoller].name} won this round they rolled a ${rollResult} ${players[currentRoller].name} rolls again`
                return result = `${players[currentRoller].name} won this round they rolled a ${rollResult} ${players[currentRoller].name} rolls again`;
             } else if (rollResult === 2 || rollResult === 3 || rollResult === 12) {
                 console.log("test7:")
                 players[currentRoller].score -= 1;
-                currentRoller = 1;
+                // this is why I was getting the austin always getting 2,3,11 because i set currentRoller to 1 which is austins index
+                // currentRoller = 1;
+                switchPlayer();
                 console.log(`${players[currentRoller].name} loss this round they rolled a ${rollResult}`);
                 // return `${players[currentRoller].name} loss this round they rolled a ${rollResult} ${players[currentRoller].name}'s turn is over`
                 return result = `${players[currentRoller].name} loss this round they rolled a ${rollResult} ${players[currentRoller].name}'s turn is over`;
                 // changeTurns();
-                // switchPlayer();
-                return;
             } else {
                 console.log("test8:")
                 currentRollResults.push(rollResult);
