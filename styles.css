@@ -2,6 +2,41 @@
     box-sizing: border-box;
 }
 
+.alt-theme-container {
+    max-width: 115px;
+    background: red;
+    padding: 5px;
+    border-radius: 20px;
+    margin: 0;
+}
+
+.circle-toggle {
+    /* background: purple;
+    height: 30px;
+    width: 32%;
+    border-radius: 50%;
+    display: inline-block;
+    transition: 0.4s;
+    transform: translateX(-100%); */
+    background: purple;
+    height: 28px;
+    width: 29px;
+    border-radius: 50%;
+    display: inline-block;
+    transition: 0.4s;
+    transform: translateX(100%);
+    position: fixed;
+    left: 0%;
+}
+
+.circle-toggle .light {
+    transform: translateX(0);
+}
+
+.circle-toggle .dark {
+    transform: translateX(1);
+}
+
 .theme-container {
     background-color: #793de8;
     position: fixed;
