@@ -1,20 +1,10 @@
 
     let players = [{name: "austin", score:2, id:1}, {name: "kam", score:0, id:2}];
-    // let player = 'p1';
-    // let currentRoller = 0;
     let currentRoller= 0;
     let currentRollResults = [];
     let rollResult = 0;
-
-    // create an establishePoinnt and maybe set it to an empty array and the create a point variable that is set to represent the actual points a player can possibly have
-    // maybe set stablisehd point to an empty array and push the results inside the array and that will be the point next create a for loop to loop through the point array and set conditions
-
-    // let establishedPoint = null;
-    // let establishedPoint = [];
     let establishedPoint = [null, null];
-    // let establishedPoint = 0;
     let point = [4,5,6,8,9,10];
-
 
     function diceRoll() {
      
@@ -153,21 +143,21 @@
     }
 
   
-console.log("Next player: " + switchPlayer('austin')); // This will return 'kam'
-console.log("Next player: " + switchPlayer('kam')); // This will return 'austin'
-console.log("this is the diceroll function:" ,diceRoll())
-console.log("This is the currentRollResulet", currentRollResults);
+// console.log("Next player: " + switchPlayer('austin')); // This will return 'kam'
+// console.log("Next player: " + switchPlayer('kam')); // This will return 'austin'
+// console.log("this is the diceroll function:" ,diceRoll())
+// console.log("This is the currentRollResulet", currentRollResults);
 
-// Simulate the game by calling diceRoll and checkDice
-console.log("first call", diceRoll());
-console.log("second call", diceRoll());
-console.log("3rd call", diceRoll());
-console.log("4th", diceRoll());
-// Call checkDice and store its result in a variable
-const resultMessage = checkDice();
-console.log("regular call of checkDice", checkDice());
-// Log the result message
-console.log("This is the checkDice function:", resultMessage);
+// // Simulate the game by calling diceRoll and checkDice
+// console.log("first call", diceRoll());
+// console.log("second call", diceRoll());
+// console.log("3rd call", diceRoll());
+// console.log("4th", diceRoll());
+// // Call checkDice and store its result in a variable
+// const resultMessage = checkDice();
+// console.log("regular call of checkDice", checkDice());
+// // Log the result message
+// console.log("This is the checkDice function:", resultMessage);
 
 
 function simulateGame() {
