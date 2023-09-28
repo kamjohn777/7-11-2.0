@@ -10,8 +10,8 @@
     // maybe set stablisehd point to an empty array and push the results inside the array and that will be the point next create a for loop to loop through the point array and set conditions
 
     // let establishedPoint = null;
-    // let establishedPoint = [];
-    let establishedPoint = 0;
+    let establishedPoint = [];
+    // let establishedPoint = 0;
     let point = [4,5,6,8,9,10];
 
 
@@ -49,89 +49,81 @@
     console.log("This is the switch player function:", switchPlayer(players[currentRoller].name), 'This is the current roller: ', currentRoller);
    
     function checkDice() {
-        let result = ''; 
-
+        let result = '';
+    
         if (currentRollResults[0]) {
             console.log("test1:")
             if (establishedPoint === null) {
                 console.log("test2:")
-                // if (rollResult === establishedPoint) {
-                    if (point.includes(rollResult)) {
-                    console.log("test3:")
-                      // Player rolled the established point and wins
-                      establishedPoint = rollResult;
-        players[currentRoller].score += 1;
-        // establishedPoint = rollResult;
-        console.log(`${players[currentRoller].name} won this round by rolling the point ${rollResult}`);
-        console.log(`${players[currentRoller].name} rolls again`);
-        // establishedPoint = rollResult;
-        // return;
-       return result = `${players[currentRoller].name} won this round by rolling the point ${rollResult} ${players[currentRoller].name} rolls again`;
-                }  else if (rollResult === 7) {
-                    console.log("test4:")
-                    // Player rolled a 7 before rolling the point and loses
-                    // establishedPoint = rollResult;
-                    players[currentRoller].score -= 1;
-                    console.log(`${players[currentRoller].name} rolled a 7 before rolling the point ${establishedPoint} They lose play`);
-                    console.log(`${players[currentRoller].name}'s turn is over`);
-                    switchPlayer();
-                    // return;
-                    result = `${players[currentRoller].name} rolled a 7 before rolling the point ${establishedPoint} ${players[currentRoller].name}'s turn is over`;
-                  } else {
-                    console.log("test5:")
-                    // Continue rolling to establish the point
-                    // establishedPoint = rollResult;
-                    console.log(`${players[currentRoller].name} rolled ${rollResult}, continue rolling to establish the point ${establishedPoint}`);
-                   return result = `${players[currentRoller].name} rolled ${rollResult}, continue rolling to establish the point ${establishedPoint}`;
-                  }
-            }
-            if (rollResult === 7 || rollResult === 11) {
-                console.log("test6:")
-                players[currentRoller].score += 1;
-                // this is why I was getting the austin always getting 7 and 11 because i set currentRoller to 0 which is austins index
-                // currentRoller = 0;
-                console.log(`${players[currentRoller].name} won this round they rolled a ${rollResult}`);
-                // return `${players[currentRoller].name} won this round they rolled a ${rollResult} ${players[currentRoller].name} rolls again`
-               return result = `${players[currentRoller].name} won this round they rolled a ${rollResult} ${players[currentRoller].name} rolls again`;
-            } else if (rollResult === 2 || rollResult === 3 || rollResult === 12) {
-                console.log("test7:")
-                players[currentRoller].score -= 1;
-                // this is why I was getting the austin always getting 2,3,11 because i set currentRoller to 1 which is austins index
-                // currentRoller = 1;
-                switchPlayer();
-                console.log(`${players[currentRoller].name} loss this round they rolled a ${rollResult}`);
-                // return `${players[currentRoller].name} loss this round they rolled a ${rollResult} ${players[currentRoller].name}'s turn is over`
-                return result = `${players[currentRoller].name} loss this round they rolled a ${rollResult} ${players[currentRoller].name}'s turn is over`;
-                // changeTurns();
-            } else {
-                console.log("test8:")
-                currentRollResults.push(rollResult);
-                currentRoller = (currentRoller + 1) % players.length;
-                console.log(currentRollResults);
-                console.log(currentRoller);
-            }
-        } else {
-            console.log("test9:")
-            // if (rollResult === currentRollResults[0]) {
+                
+                // Check for automatic win or loss on the first roll
+                switch (rollResult) {
+                    case 7:
+                    case 11:
+                        console.log("test6:")
+                        players[currentRoller].score += 1;
+                        console.log(`${players[currentRoller].name} won this round they rolled a ${rollResult}`);
+                        return result = `${players[currentRoller].name} won this round they rolled a ${rollResult} ${players[currentRoller].name} rolls again`;
+    
+                    case 2:
+                    case 3:
+                    case 12:
+                        console.log("test7:")
+                        players[currentRoller].score -= 1;
+                        switchPlayer();
+                        console.log(`${players[currentRoller].name} loss this round they rolled a ${rollResult}`);
+                        return result = `${players[currentRoller].name} loss this round they rolled a ${rollResult} ${players[currentRoller].name}'s turn is over`;
+    
+                    default:
+                        console.log("test8:")
+                        currentRollResults.push(rollResult);
+                        console.log(currentRollResults);
+                        console.log(currentRoller);
+                }
+    
+                // Check for automatic win after handling the special cases
                 if (currentRollResults[0] === 7 || currentRollResults[0] === 11) {
-                console.log("test10:")
-                players[currentRoller].score += 1;
-                // return `${players[currentRoller].name} won this round they rolled a ${rollResult} ${players[currentRoller].name} rolls again`
-                // changeTurns();
-                console.log`${players[currentRoller].name} won this round they rolled a ${rollResult} ${players[currentRoller].name} rolls`
-                return result = `${players[currentRoller].name} won this round they rolled a ${rollResult} ${players[currentRoller].name} rolls again`;
-                // switchPlayer();
-                // return;
+                    console.log("test10:")
+                    players[currentRoller].score += 1;
+                    console.log(`${players[currentRoller].name} won this round they rolled a ${currentRollResults[0]}`);
+                    return result = `${players[currentRoller].name} won this round they rolled a ${currentRollResults[0]} ${players[currentRoller].name} rolls again`;
+                }
             } else {
-                console.log("test11:")
-                currentRollResults.push(rollResult);
-                currentRoller = (currentRoller + 1) % players.length;
+                console.log("test9:")
+                // Handle the case when an established point exists (normal gameplay)
+                switch (rollResult) {
+                    // Add cases for the established point and 7
+                    case establishedPoint:
+                        console.log("test3:")
+                        players[currentRoller].score += 1;
+                        console.log(`${players[currentRoller].name} won this round by rolling the point ${rollResult}`);
+                        console.log(`${players[currentRoller].name} rolls again`);
+                        return result = `${players[currentRoller].name} won this round by rolling the point ${rollResult} ${players[currentRoller].name} rolls again`;
+    
+                    case 7:
+                        console.log("test4:")
+                        players[currentRoller].score -= 1;
+                        establishedPoint.push(rollResult);
+                        console.log(`${players[currentRoller].name} rolled a 7 before rolling the point ${establishedPoint}. They lose play`);
+                        console.log(`${players[currentRoller].name}'s turn is over`);
+                        switchPlayer();
+                        return result = `${players[currentRoller].name} rolled a 7 before rolling the point ${establishedPoint} ${players[currentRoller].name}'s turn is over`;
+    
+                    default:
+                        console.log("test5:")
+                        // Continue rolling to establish the point
+                        establishedPoint.push(rollResult)
+                        // currentRollResults.push(rollResult);
+                        console.log(`${players[currentRoller].name} rolled ${rollResult}, continue rolling to establish the point ${establishedPoint}`);
+                        return result = `${players[currentRoller].name} rolled ${rollResult}, continue rolling to establish the point ${establishedPoint}`;
+                }
             }
         }
-        // The closing curly brace for the checkDice function should not be commented out.
+    
         console.log(result);
         return result;
     }
+    
 
     const loopOfGame = () => {
         // while()
@@ -172,8 +164,8 @@ function simulateGame(game) {
     // Simulate the game by making a series of dice rolls and checking the results
     for (let i = 0; i < 10; i++) {
       console.log(`Round ${i + 1}`);
-    //   console.log("Next player: " + switchPlayer(players[currentRoller].name));
-    console.log("Next player: " + players[currentRoller].name);
+      console.log("Next player: " + switchPlayer(players[currentRoller].name));
+    // console.log("Next player: " + players[currentRoller].name);
     //   const result = checkDice();
         // result
       console.log("Result:", result);
