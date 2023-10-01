@@ -123,6 +123,7 @@
                                 establishedPoint[currentRoller] = null; // Reset the established point
                                 console.log(`${players[currentRoller].name} rolled a 7 before rolling the point. They lose play`);
                                 console.log(`${players[currentRoller].name}'s turn is over`);
+                                switchPlayer();
                             }
                             switchPlayer();
                             return result = `${players[currentRoller].name} rolled ${rollResult}. ${players[currentRoller].name}'s turn is over`;
@@ -167,8 +168,21 @@ function simulateGame() {
     rollResult = 0;
     establishedPoint = [null, null]; // Initialize an array for established points
     players = [{ name: "austin", score: 2, id: 1 }, { name: "kam", score: 0, id: 2 }];
+    // okay Idea for round maybe create a function for round that knows what a round should look like and how it ends
     let rounds = 10;
     let result = null;
+
+    // const rollEmButton = document.getElementById('roll-btn-div');
+    // const resultElement = document.getElementById('result');
+
+    // // Add a click event listener to the button
+    // rollEmButton.addEventListener('click', function () {
+    //     // Generate a random roll
+    //     const rollResult = checkDice();
+        
+    //     // Display the result on the page
+    //     resultElement.textContent = `You rolled a ${rollResult}!`;
+    // });
   
     // Simulate the game by making a series of dice rolls and checking the results
     for (let i = 0; i < rounds; i++) {
@@ -183,9 +197,43 @@ function simulateGame() {
     }
     return result
   }
+
+  
+
+     // Get references to the button and result elements
+     const rollButton = document.getElementById('roll-btn-div');
+     const resultElement = document.getElementById('result');
+
+     let rolling = false;
+
+     // Add a click event listener to the button
+     rollButton.addEventListener('click', function () {
+         if (!rolling) {
+             rolling = true;
+             rollButton.disabled = true; // Disable the button during the roll
+             rollButton.textContent = 'Rolling...';
+             const interval = setInterval(function () {
+                 const rollResult = diceRoll();
+                 resultElement.textContent = `${players[currentRoller].name} You rolled a ${rollResult}!`;
+             }, 500); // Change the interval as desired (in milliseconds)
+
+             // Stop rolling after a few seconds (e.g., 3 seconds in this example)
+             setTimeout(function () {
+                 clearInterval(interval);
+                 rolling = false;
+                 rollButton.disabled = false; // Re-enable the button
+                 rollButton.textContent = 'Roll the Dice';
+                 
+                 // Simulate the game and display the game result
+                 const gameResult = simulateGame();
+                 resultElement.textContent += `\nGame Result: ${gameResult}`;
+             }, 3000); // Adjust the duration as needed
+         }
+     });
+
   
   // Call the function to simulate the game
-  simulateGame();
+
 
   
   // Call the function to simulate the game
