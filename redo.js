@@ -7,45 +7,45 @@ use in a condition to see if the first index is either 7 || 11 or 2 || 3 || 12 *
 // let dice2 = Math.floor(Math.random() * 6) + 1;
 // const sum = dice1 + dice2;
 let dice1, dice2, sum;
-currentRollResults.push(sum)
+// currentRollResults.push(sum)
 /*Line 6 im creating the 1st dice it gives numbers 1-6, line 7 im crating dice2 that generates a random
 number between 1-6 and then on line 8 im adding the two numbers of dice1 and dice2 together */
 
+
 function shouldEndTurn(rolls) {
-    // Define the points that end the turn (excluding 7, 11)
-    const endPoints = [2, 3, 12];
-  
-    // Check if the last roll is a point or a 7
-    const lastRoll = rolls[rolls.length - 1];
-  
-    // If the last roll is a point, check if it's followed by a 7
-    if (!endPoints.includes(lastRoll)) {
-      for (let i = rolls.length - 2; i >= 0; i--) {
-        if (rolls[i] === 7) {
-          return true; // Turn ends if a 7 follows a point
-        }
-      }
-    }
-  
-    return endPoints.includes(lastRoll); // Turn ends if the last roll is a point
+  // Check if the last roll is a win (7 or 11) or a loss (2, 3, or 12)
+  const lastRoll = rolls[rolls.length - 1];
+  const winOnFirstRoll = [7, 11];
+  const lossOnFirstRoll = [2, 3, 12];
+
+  if (winOnFirstRoll.includes(lastRoll)) {
+    return 'win'; // Player wins on the first roll
+  } else if (lossOnFirstRoll.includes(lastRoll)) {
+    return 'loss'; // Player loses on the first roll
+  } else {
+    return 'continue'; // Player continues rolling
   }
-  
-  function simulatePlayerTurn() {
-    // Roll the dice multiple times and push each result into currentRollResults
-    while (true) {
-      dice1 = Math.floor(Math.random() * 6) + 1;
-      dice2 = Math.floor(Math.random() * 6) + 1;
-      sum = dice1 + dice2;
-      currentRollResults.push(sum);
-  
-      // Check if the turn should end
-      if (shouldEndTurn(currentRollResults)) {
-        break; // Exit the loop if the turn should end
-      }
+}
+
+function simulatePlayerTurn() {
+  // Roll the dice multiple times and push each result into currentRollResults
+  while (true) {
+    dice1 = Math.floor(Math.random() * 6) + 1;
+    dice2 = Math.floor(Math.random() * 6) + 1;
+    sum = dice1 + dice2;
+
+    // Check if the turn should end
+    const firstRollOutcome = shouldEndTurn(currentRollResults);
+    if (firstRollOutcome === 'win' || firstRollOutcome === 'loss') {
+      break; // Exit the loop if the turn should end
     }
+
+    currentRollResults.push(sum); // Push the sum after it's assigned
   }
-  
-  // Simulate a player's turn by calling simulatePlayerTurn()
-  simulatePlayerTurn();
-  
-console.log(currentRollResults);
+
+  return currentRollResults;
+}
+
+const outcome = simulatePlayerTurn();
+console.log('Current Roll Results:', outcome);
+console.log('First Roll Outcome:', shouldEndTurn(outcome));
