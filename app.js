@@ -5,35 +5,79 @@
     let rollResult = 0;
     let establishedPoint = [null, null];
     let point = [4,5,6,8,9,10];
+    let isFirstRoll = true;
+    /*const dice1 = Math.floor(Math.random() * 6) + 1;
+    const dice2 = Math.floor(Math.random() * 6) + 1;
+    let diceSum = dice1 + dice2;
+    try usinf these variables instead of making a whole funciton for the dice*/
 
+
+// DICE ROLL FUNCTION SECTION
+// This is creating each random dice roll 2 dice from 1-6 and adds the two sums together
     function diceRoll() {
-     
+
       const dice1 = Math.floor(Math.random() * 6) + 1;
       const dice2 = Math.floor(Math.random() * 6) + 1;
       const sum = dice1 + dice2;
       currentRollResults.push(sum);    
-    //   console.log(`(inside log for diceRoll function:You rolled a ${sum}`);
       rollResult = sum;
       console.log(rollResult);
-    //   checkDice();
+      checkDice();
       return rollResult;
         }
     console.log(rollResult);
+    // END OF DICE ROLL FUNCTION SECTION
 
-    function switchPlayer(currentPlayerName) {
-        if (currentPlayerName === players[0].name) {
-            currentRoller = 1;
-            currentRollResults = [];
-          return players[1].name;
-        } else if (currentPlayerName === players[1].name) {
-            currentRoller = 0;
-            currentRollResults = [];
-          return players[0].name;
-        } else {
-          // Handle the case where the provided name is not one of the player names.
-          return currentPlayerName;
-        }
+    // THE START OF SWITCHPLAYER FUNCTION SWITCHES PLAYERS
+    // If current player is one then it set it to 0 and if 0 it sets it to 1
+    // function switchPlayer(currentPlayerName) {
+    //     if (currentPlayerName === players[0].name) {
+    //         currentRoller = 1;
+    //         currentRollResults = [];
+    //         checkDice();
+    //       return players[1].name;
+    //     } else if (currentPlayerName === players[1].name) {
+    //         currentRoller = 0;
+    //         currentRollResults = [];
+    //         checkDice();
+    //       return players[0].name;
+    //     } else {
+    //       // Handle the case where the provided name is not one of the player names.
+    //       return currentPlayerName;
+    //     }
+    // }
+    // Initialize a flag to track the first roll of the player's turn
+
+
+function switchPlayer(currentPlayerName) {
+    if (currentPlayerName === players[0].name) {
+        currentRoller = 1;
+    } else if (currentPlayerName === players[1].name) {
+        currentRoller = 0;
+    } else {
+        // Handle the case where the provided name is not one of the player names.
+        return currentPlayerName;
     }
+
+    if (isFirstRoll) {
+        currentRollResults = [];
+        const rollResult = diceRoll(); // Roll the dice
+        console.log(`Rolled: ${rollResult}`); // Print the rolled result
+
+        // Check for craps conditions (2, 3, or 12) on the first roll
+        if (rollResult === 2 || rollResult === 3 || rollResult === 12) {
+            players[currentRoller].score -= 1; // Player loses a point
+            console.log(`${players[currentRoller].name} rolled a ${rollResult} (craps) and loses 1 point. Score: ${players[currentRoller].score}`);
+        }
+
+        isFirstRoll = false; // Mark the first roll as completed
+    }
+
+    return players[currentRoller].name;
+}
+
+    // THE END OF SWITCH PLAYER FUNCTION
+console.log(`this is the ${switchPlayer()}`)
 
     // switchPlayer(currentRoller);
 
@@ -125,7 +169,7 @@
                                 console.log(`${players[currentRoller].name}'s turn is over`);
                                 switchPlayer();
                             }
-                            switchPlayer();
+                            // switchPlayer();
                             return result = `${players[currentRoller].name} rolled ${rollResult}. ${players[currentRoller].name}'s turn is over`;
                         }
                 }
@@ -136,30 +180,6 @@
         return result;
     }
     
-    const loopOfGame = () => {
-        // while()
-        if(players[currentRollResults].score === 25) {
-         return players[currentRoller].name;
-        }
-    }
-
-  
-// console.log("Next player: " + switchPlayer('austin')); // This will return 'kam'
-// console.log("Next player: " + switchPlayer('kam')); // This will return 'austin'
-// console.log("this is the diceroll function:" ,diceRoll())
-// console.log("This is the currentRollResulet", currentRollResults);
-
-// // Simulate the game by calling diceRoll and checkDice
-// console.log("first call", diceRoll());
-// console.log("second call", diceRoll());
-// console.log("3rd call", diceRoll());
-// console.log("4th", diceRoll());
-// // Call checkDice and store its result in a variable
-// const resultMessage = checkDice();
-// console.log("regular call of checkDice", checkDice());
-// // Log the result message
-// console.log("This is the checkDice function:", resultMessage);
-
 
 function simulateGame() {
     // Initialize game state if needed
@@ -171,18 +191,6 @@ function simulateGame() {
     // okay Idea for round maybe create a function for round that knows what a round should look like and how it ends
     let rounds = 10;
     let result = null;
-
-    // const rollEmButton = document.getElementById('roll-btn-div');
-    // const resultElement = document.getElementById('result');
-
-    // // Add a click event listener to the button
-    // rollEmButton.addEventListener('click', function () {
-    //     // Generate a random roll
-    //     const rollResult = checkDice();
-        
-    //     // Display the result on the page
-    //     resultElement.textContent = `You rolled a ${rollResult}!`;
-    // });
   
     // Simulate the game by making a series of dice rolls and checking the results
     for (let i = 0; i < rounds; i++) {
@@ -198,7 +206,7 @@ function simulateGame() {
     return result
   }
 
-  
+
 
      // Get references to the button and result elements
      const rollButton = document.getElementById('roll-btn-div');
@@ -241,3 +249,5 @@ function simulateGame() {
 //   simulateGame();
 
   console.log("This is the simulateGame:", simulateGame());
+
+
