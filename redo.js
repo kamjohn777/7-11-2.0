@@ -15,17 +15,29 @@ number between 1-6 and then on line 8 im adding the two numbers of dice1 and dic
 function shouldEndTurn(rolls) {
   // Check if the last roll is a win (7 or 11) or a loss (2, 3, or 12)
   const lastRoll = rolls[rolls.length - 1];
+  const firstRoll = rolls[0];
   const winOnFirstRoll = [7, 11];
   const lossOnFirstRoll = [2, 3, 12];
 
-  if (winOnFirstRoll.includes(lastRoll)) {
+  if (winOnFirstRoll.includes(firstRoll)) {
     return 'win'; // Player wins on the first roll
-  } else if (lossOnFirstRoll.includes(lastRoll)) {
+  } else if (lossOnFirstRoll.includes(firstRoll)) {
     return 'loss'; // Player loses on the first roll
-  } else {
-    return 'continue'; // Player continues rolling
+  } else if (!winOnFirstRoll.includes(firstRoll) && !lossOnFirstRoll.includes(firstRoll)) {
+     // Player establishes a point, they need to roll this point again to win
+     for (let i = 1; i < rolls.length; i++) {
+        if (rolls[i] === firstRoll) {
+          return 'win';
+        } else if (rolls[i] === 7) {
+          return 'loss';
+        }
+      }
+      return 'continue'; // Continue rolling until a point is won or lost
+    } else {
+      return 'continue'; // Player continues rolling for a point
+    }
   }
-}
+
 
 function simulatePlayerTurn() {
   // Roll the dice multiple times and push each result into currentRollResults
